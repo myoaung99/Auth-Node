@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea202b4a-2e31-480c-8fb8-8abd540c34d8" name="Changes" comment="" />
+    <list default="true" id="ea202b4a-2e31-480c-8fb8-8abd540c34d8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/auth.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,14 +36,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="format.on.save" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.16.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="16.11.65" />
+    <property name="javascript.nodejs.core.library.typings.version" value="16.18.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../React Native/read-now" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="optimize.imports.on.save" value="true" />
     <property name="rearrange.code.on.save" value="true" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="project.scopes" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -67,7 +70,20 @@
       <workItem from="1666543914080" duration="158000" />
       <workItem from="1666544084253" duration="169000" />
       <workItem from="1666544820862" duration="1436000" />
-      <workItem from="1666585114188" duration="4208000" />
+      <workItem from="1666585114188" duration="6833000" />
+      <workItem from="1666603907430" duration="120000" />
+      <workItem from="1666604044051" duration="57000" />
+      <workItem from="1666604112366" duration="259000" />
+      <workItem from="1666604440034" duration="70000" />
+      <workItem from="1666604521651" duration="22000" />
+      <workItem from="1666604592721" duration="85000" />
+      <workItem from="1666604727679" duration="151000" />
+      <workItem from="1666604891499" duration="182000" />
+      <workItem from="1666605076260" duration="23000" />
+      <workItem from="1666605102452" duration="81000" />
+      <workItem from="1666605364560" duration="31000" />
+      <workItem from="1666605541546" duration="80000" />
+      <workItem from="1666605631937" duration="88000" />
     </task>
     <servers />
   </component>
