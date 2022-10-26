@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea202b4a-2e31-480c-8fb8-8abd540c34d8" name="Changes" comment="" />
+    <list default="true" id="ea202b4a-2e31-480c-8fb8-8abd540c34d8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +36,7 @@
     <property name="format.on.save" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.16.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.18.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../React Native/read-now" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../node/BasicAuth" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -82,6 +84,8 @@
       <workItem from="1666605541546" duration="80000" />
       <workItem from="1666605631937" duration="88000" />
       <workItem from="1666667742246" duration="11000" />
+      <workItem from="1666675369686" duration="56000" />
+      <workItem from="1666687615384" duration="43000" />
     </task>
     <servers />
   </component>
