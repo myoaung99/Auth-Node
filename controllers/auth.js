@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const nodeMailer = require("nodemailer");
@@ -6,8 +7,7 @@ const sendGridTransport = require("nodemailer-sendgrid-transport");
 const transporter = nodeMailer.createTransport(
   sendGridTransport({
     auth: {
-      api_key:
-        "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",
+      api_key: process.env.SENDGRID_API,
     },
   })
 );
@@ -22,7 +22,6 @@ exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
-    isAuthenticated: false,
     csrfToken: req.csrfToken(),
     errorMessage: message,
   });
@@ -38,7 +37,6 @@ exports.getSignup = (req, res, next) => {
   res.render("auth/signup", {
     path: "/signup",
     pageTitle: "Signup",
-    isAuthenticated: false,
     errorMessage: message,
   });
 };
@@ -111,4 +109,56 @@ exports.postLogout = (req, res, next) => {
     console.log(err);
     res.redirect("/");
   });
+};
+
+exports.getReset = (req, res, next) => {
+  let message = req.flash("error");
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  res.render("auth/reset", {
+    pageTitle: "Reset Password",
+    path: "/reset",
+    csrfToken: req.csrfToken(),
+    errorMessage: message,
+  });
+};
+
+exports.postReset = (req, res, next) => {
+  const { email } = req.body;
+  User.findOne({ email: email })
+    .then((user) => {
+      if (!user) {
+        req.flash("error", "The is no user with such email.");
+        return res.redirect("/reset");
+      }
+      crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+          return res.redirect("/reset");
+        }
+        const token = buffer.toString("hex");
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000;
+        user
+          .save()
+          .then((result) => {
+            res.redirect("/");
+            return transporter.sendMail({
+              to: email,
+              from: "myintaungm104@gmail.com",
+              subject: "Reset Password",
+              html: `
+              <p>Reset Your Password</p>
+              <p>click the <a href="http://localhost:3000/reset/${token}">link</a> to reset your password</p>
+            `,
+            });
+          })
+          .catch((err) => console.log(err));
+      });
+    })
+
+    .catch((err) => console.log(err));
 };
