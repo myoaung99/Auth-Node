@@ -13,6 +13,7 @@ const transporter = nodeMailer.createTransport(
 );
 
 exports.getLogin = (req, res, next) => {
+  console.log(process.env.SENDGRID_API);
   let message = req.flash("error");
   if (message.length > 0) {
     message = message[0];
@@ -151,7 +152,7 @@ exports.postReset = (req, res, next) => {
               from: "myintaungm104@gmail.com",
               subject: "Reset Password",
               html: `
-              <p>Reset Your Password</p>
+              <p>Resetting Your Password</p>
               <p>click the <a href="http://localhost:3000/reset/${token}">link</a> to reset your password</p>
             `,
             });
@@ -160,5 +161,60 @@ exports.postReset = (req, res, next) => {
       });
     })
 
+    .catch((err) => console.log(err));
+};
+
+exports.getNewPassword = (req, res, next) => {
+  let message = req.flash("error");
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  const token = req.params.token;
+  User.findOne({
+    resetToken: token,
+    resetTokenExpiration: { $gt: new Date() },
+  })
+    .then((user) => {
+      if (!user) {
+        req.flash("error", "Invalid reset link");
+        return res.redirect("/reset");
+      }
+      res.render("auth/new-password", {
+        pageTitle: "New Password",
+        path: "/new-password",
+        csrfToken: req.csrfToken(),
+        errorMessage: message,
+        userId: user._id.toString(),
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.postNewPassword = (req, res, next) => {
+  const userId = req.body.userId;
+  const newPassword = req.body.password;
+  User.findOne({ _id: userId })
+    .then((user) => {
+      if (!user) {
+        req.flash("error", "Something went wrong! Try again later");
+        res.redirect("/reset");
+      }
+      bcrypt
+        .hash(newPassword, 12)
+        .then((hashPassword) => {
+          user.password = hashPassword;
+          user.resetToken = null;
+          user.resetTokenExpiration = null;
+          return user.save();
+        })
+        .then((result) => {
+          req.flash("error", "Password reset successfully");
+          return res.redirect("/login");
+        })
+        .catch((err) => console.log(err));
+    })
     .catch((err) => console.log(err));
 };

@@ -1,5 +1,5 @@
+require("dotenv").config();
 const path = require("path");
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -11,8 +11,7 @@ const flash = require("connect-flash");
 const errorController = require("./controllers/error");
 const User = require("./models/user");
 
-const MONGODB_URI =
-  "mongodb+srv://myomyintaung:4EvwakdYAaFx9s7s@cluster0.torxfu9.mongodb.net/shop";
+const MONGODB_URI = process.env.MONGODB_URI + "shop";
 
 const app = express();
 const store = new MongoDBStore({
@@ -41,6 +40,7 @@ app.use(
 app.use(csurfProtection);
 app.use(flash());
 
+// convert user object from session to mongoose object
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
