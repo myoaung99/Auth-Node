@@ -62,6 +62,7 @@ exports.postLogin = (req, res, next) => {
               res.redirect("/");
             });
           }
+          req.flash("error", "Incorrect password");
           res.redirect("/login");
         })
         .catch((err) => console.log(err));
@@ -140,8 +141,8 @@ exports.postReset = (req, res, next) => {
           return res.redirect("/reset");
         }
         const token = buffer.toString("hex");
-        user.resetToken = token;
-        user.resetTokenExpiration = Date.now() + 3600000;
+        user.resetToken = token; //* can reset only with this token
+        user.resetTokenExpiration = Date.now() + 3600000; //* adding token expiration date
         user
           .save()
           .then((result) => {

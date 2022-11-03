@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 
 exports.getProducts = (req, res, next) => {
+  //* authorization
   //* filter and only show the products that the loggined user can manage
   Product.find({ userId: req.user._id })
     .then((products) => {
@@ -57,7 +58,6 @@ exports.getEditProduct = (req, res, next) => {
       if (!product) {
         return res.redirect("/");
       }
-
       res.render("admin/edit-product", {
         pageTitle: "Edit Product",
         path: "/admin/edit-product",
