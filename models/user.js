@@ -27,22 +27,29 @@ const userSchema = new Schema({
   },
 });
 
+//* cart logic
 userSchema.methods.addToCart = function (product) {
+  //* find if the added product is new or already added
   const cartProductIndex = this.cart.items.findIndex((cp) => {
     return cp.productId.toString() === product._id.toString();
   });
+  //* preparing for new count
   let newQuantity = 1;
+  //* copy the cart array
   const updatedCartItems = [...this.cart.items];
 
+  //* if the product is already added to cart and need to increase quantity
   if (cartProductIndex >= 0) {
     newQuantity = this.cart.items[cartProductIndex].quantity + 1;
     updatedCartItems[cartProductIndex].quantity = newQuantity;
   } else {
+    //* else just push the product and quantity to cart item copy
     updatedCartItems.push({
       productId: product._id,
       quantity: newQuantity,
     });
   }
+  //* update the user model cart with updated copied cart item
   const updatedCart = {
     items: updatedCartItems,
   };
@@ -51,14 +58,17 @@ userSchema.methods.addToCart = function (product) {
 };
 
 userSchema.methods.removeFromCart = function (productId) {
+  //* check if the item is in the cart && return the cart without soon to be remove cart item
   const updatedCartItems = this.cart.items.filter((item) => {
     return item.productId.toString() !== productId.toString();
   });
+  //* update the cart in user model
   this.cart.items = updatedCartItems;
   return this.save();
 };
 
 userSchema.methods.clearCart = function () {
+  //* clear item array in user cart
   this.cart = { items: [] };
   return this.save();
 };

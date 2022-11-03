@@ -1,3 +1,4 @@
+//* use dotenv to get env variables inside process.env
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
